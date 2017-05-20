@@ -1,0 +1,51 @@
+buildscript {
+    ext.jetPluginVersion = '1.0.0'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.excelsiorjet:excelsior-jet-gradle-plugin:$jetPluginVersion"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'excelsiorJet'
+apply plugin: 'application'
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile "org.slf4j:jcl-over-slf4j:1.7.21"
+    compile "org.slf4j:jul-to-slf4j:1.7.21"
+    compile "org.slf4j:log4j-over-slf4j:1.7.21"
+    compile "ch.qos.logback:logback-classic:1.1.10"
+    compile "ch.qos.logback:logback-core:1.1.10"
+    compile "org.codehaus.groovy:groovy:2.4.10"
+    compile "org.codehaus.groovy:groovy-nio:2.4.10"
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+}
+
+
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs = ['src/main/groovy']
+sourceSets.main.resources.srcDirs = ['src/main/resources']
+
+mainClassName = "Hello"
+
+excelsiorJet {
+    mainClass = 'Hello'
+}
